@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Gabaritus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+
+  <!-- Splash de boas-vindas -->
+  <div class="splash">
+    <div class="splash-box">
+      <h2>Bem-vindo ao Gabaritus! 🌙</h2>
+      <p>Carregando sua experiência mágica...</p>
+    </div>
+  </div>
+
+  <h1>GABARITUS</h1>
+
+  <!-- Formulário -->
+  <form id="Enviar">
+    <div class="container">
+      <!-- Campo do usuário -->
+      <input type="text" class="input-box" id="user" placeholder="Ex: 00011198235xSP">
+
+      <!-- Campo da senha -->
+      <div class="password-wrapper">
+        <input type="password" id="senha" class="input-box" placeholder="Digite Sua Senha">
+        <span class="eye-icon" id="showPass">👁️</span>
+      </div>
+
+      <!-- reCAPTCHA do Google -->
+      <div class="g-recaptcha" data-sitekey="6Lfuz4crAAAAAG3jcTzyv_z14yIacibPahsewSvc"></div>
+
+      <!-- Botão -->
+      <button class="btn" type="submit" id="Tarefa">REALIZAR ATIVIDADES</button>
+    </div>
+  </form>
+
+  <!-- Rodapé -->
+  <div class="footer">
+    <a href="https://discord.gg/GNTUuP6Uyp" target="_blank" rel="noopener noreferrer">
+      Discord
+    </a>
+  </div>
+
+  <article id="TamanhoN"></article>
+
+  <!-- Script para mostrar senha e validar captcha -->
+  <script>
+    const senhaInput = document.getElementById('senha');
+    const showPassBtn = document.getElementById('showPass');
+
+    showPassBtn.addEventListener('click', () => {
+      if (senhaInput.type === 'password') {
+        senhaInput.type = 'text';
+        showPassBtn.textContent = '🙈';
+      } else {
+        senhaInput.type = 'password';
+        showPassBtn.textContent = '👁️';
+      }
+    });
+
+    const form = document.getElementById('Enviar');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const user = document.getElementById('user').value;
+      const senha = document.getElementById('senha').value;
+      const captcha = grecaptcha.getResponse();
+
+      if (!user || !senha) {
+        alert("Preencha todos os campos.");
+      } else if (!captcha) {
+        alert("Por favor, confirme que você não é um robô.");
+      } else {
+        alert("✅ Atividade enviada com sucesso!");
+        // Aqui você envia os dados para o backend, se quiser
+      }
+    });
+  </script>
+
+</body>
+</html>
